@@ -246,8 +246,11 @@ def players(request):
 def playerAdd(request):
     if request.method == "POST":
         name = request.POST["name"]
-        pic = request.FILES["pic"]
-        p = Player(name=name,pic=pic)
+        try:
+            pic = request.FILES["pic"]
+            p = Player(name=name,pic=pic)
+        except:
+            p = Player(name=name)
         p.save()
         return redirect(f'/profile')
     return render(request, "playerAdd.html")

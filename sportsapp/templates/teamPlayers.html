@@ -72,7 +72,13 @@
             <li>
                 <div class="player-card">
                     <div>
-                        <div class="img-container"><img src="{{t.player.pic.url}}" alt=""></div>
+                        <div class="img-container">
+                            {% if t.pic %}
+                            <img src="{{t.pic.url}}" style="width: 100%" />
+                            {% else %}
+                            <img src="/static/images/No_image.png" alt="" />
+                            {% endif %}
+                        </div>
                         <h3>{{t.player.name}}</h3>
                     </div>
                     {% if user.is_authenticated %}
@@ -97,7 +103,13 @@
             <li>
                 <div class="player-card">
                     <div>
-                        <div class="img-container"><img src="{{p.pic.url}}" alt=""></div>
+                        <div class="img-container">
+                            {% if p.pic %}
+                            <img src="{{p.pic.url}}" style="width: 100%" />
+                            {% else %}
+                            <img src="/static/images/No_image.png" alt="" />
+                            {% endif %}
+                        </div>
                         <h3>{{p.name}}</h3>
                     </div>
                     {% if user.is_authenticated %}
