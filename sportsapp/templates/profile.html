@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% load static %} {% block home %}
+<title>Sports | Profile</title>
+<div>
+    <center>
+        <h2>Welcome {{profile}}</h2>
+        <div class="teams">
+            <a href="{% url 'teams' %}"><div class="team">All Teams</div></a>
+            <a href="{% url 'teamAdd' %}"><div class="team">Add New Team</div></a>
+            <br>
+            <a href="{% url 'players' %}"><div class="team">All Players</div></a>
+            <a href="{% url 'playerAdd' %}"><div class="team">Add New Player</div></a>
+            <br>
+            
+        </div>
+    </center>
+</div>
+{%endblock%}

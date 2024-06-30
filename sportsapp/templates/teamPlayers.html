@@ -1,0 +1,160 @@
+{% extends 'base.html' %} {% load static %} {% load tags %} {% block home %}
+<title>Sports | Team Players</title>
+
+<center>
+    <h2>{{matchname}}</h2>
+    {% if matchStatus == "started" %}
+    <p>Match started</p>
+    {% elif matchStatus == "completed" %}
+    <p>Match completed</p>
+    {%else%}
+    <p>Match not yet started</p>
+    {%endif%}
+</center>
+<div class="d-flex-se">
+    {% for i in match %}
+    <div class="match-container">
+    <center>
+    <h2>{{i.team}}</h2>
+    {% if matchStatus == "started" or matchStatus == "completed" %}
+    {% for t in i.id|matchTeamScore:i.team.id %}
+    <div>
+        <table>
+            <tr>
+                <th>Innings</th>
+                <td>{% if t.score.inning == "1" %}1st{%else%}2nd{%endif%}</td>
+            </tr>
+            <tr>
+                <th>Inning status</th>
+                <td>{{t.score.status}}</td>
+            </tr>
+            {% if t.score.win_loss != '' %}
+            <tr>
+                <th>Win/Loss</th>
+                <td><span class="{{t.score.win_loss}}">{{t.score.win_loss}}</span></td>
+            </tr>
+            {%endif%}
+            <tr>
+                <th>Total Overs</th>
+                <td>{{t.overs}}</td>
+            </tr>
+            <tr>
+                <th>Total Score</th>
+                <td>{{t.score.total_score}}/{{t.wicket}}</td>
+            </tr>
+            <tr>
+                <th>Total Balls</th>
+                <td>{{t.total_balls}}</td>
+            </tr>
+            <tr>
+                <th>Current Over</th>
+                <td>{{t.current_over}}</td>
+            </tr>
+            <tr>
+                <th>Extra runs</th>
+                <td>{{t.extra_runs}}</td>
+            </tr>
+        </table>
+        <div class="teams">
+            {% if user.is_authenticated and matchStatus == "started" %}
+            <a href="{% url 'score' t.score.id %}"><div class="team">Add Score</div></a>
+            {%else%}
+            <a href="{% url 'score' t.score.id %}"><div class="team">Score details</div></a>
+            {%endif%}
+        </div>
+    </div>
+    {%endfor%}
+    {%endif%}
+    <div class="team-players">
+        <h3>Team Players</h3>
+        <ul>
+            {% for t in i.id|matchTeamPlayer:i.team.id %}
+            <li>
+                <div class="player-card">
+                    <div>
+                        <div class="img-container"><img src="{{t.player.pic.url}}" alt=""></div>
+                        <h3>{{t.player.name}}</h3>
+                    </div>
+                    {% if user.is_authenticated %}
+                    {% if matchStatus == "pending" %}
+                    <span><a  class="btn-sm"href="{% url 'teamPlayersDelete' i.id i.team.id t.player.id %}">x</a></span>
+                    {%endif%}
+                    {%endif%}
+                </div>
+            </li>
+            {% empty %}
+            <li><div class="player-card">No players in team</div> </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% if user.is_authenticated %}
+    {% if matchStatus == "pending" %}
+    <table></table>
+    <div class="team-players">
+        <h3>Add Players</h3>
+        <ul>
+            {% for p in player %}
+            <li>
+                <div class="player-card">
+                    <div>
+                        <div class="img-container"><img src="{{p.pic.url}}" alt=""></div>
+                        <h3>{{p.name}}</h3>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <span><a class="btn-sm" href="{% url 'teamPlayersCreate' i.id i.team.id p.id %}">+</a></span>
+                    {%endif%}
+                </div>
+            </li>
+            {% empty %}
+            <li>No players</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {%endif%}
+    {%endif%}
+    </center>
+    </div>
+    {%endfor%}
+</div>
+<div>
+    <center>
+    {% if matchStatus == "pending" %}
+        {% if user.is_authenticated %}
+        <form action="" method="POST" class="min-height">
+          {% csrf_token %}
+          <div id="signin">
+            <div>
+              <h2>Start Match</h2>
+            </div>
+            {% for i in messages %}
+            <div class="msg-error">{{i}}</div>
+            {% endfor %}
+            <div class="input-field">
+              <select name="toss" id="toss">
+                {% for i in match %}
+                <option value="{{i.team.id}}">{{i.team}}</option>
+                {%endfor%}
+              </select>
+              <label htmlFor="toss">Toss Won</label>
+            </div>
+            <div class="input-field">
+              <select name="elect" id="elect">
+                <option value="bat">Bat</option>
+                <option value="ball">Ball</option>
+              </select>
+              <label htmlFor="elect">Elect to</label>
+            </div>
+            <div class="input-field">
+                <input name="over" type="text" id="over" required />
+                <label htmlFor="over">Over</label>
+            </div>
+            <div class="input-field">
+              <input type="submit" value="Start Match">
+            </div>
+        </form>
+        {%endif%}
+    {%else%}
+    {%endif%}
+    </center>
+</div>
+{%endblock%}

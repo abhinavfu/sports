@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% load static %} {% load tags %} {% block home %}
+<title>Sports | Match</title>
+<center>
+    {% if user.is_authenticated %}
+    <div class="teams">
+        <a class="team" href="{% url 'matchCreate' %}">Create new Match</a>
+    </div>
+    {%endif%}
+    <h3>All Matches</h3>
+    <div class="teams">
+        {% for i in matchs %}
+        <a href="{% url 'teamPlayers' i.id i.team.id %}">
+            <div class="team">
+                <span class="">{{i.name}}</span>
+                <span class="tie">{{i.team}}</span>
+                <span class="status">{{i.status}}</span>
+                {% for t in i.id|winLossStatus:i.team.id %}
+                    <span class="{{t}}">{{t}}</span>
+                {%endfor%}
+            </div>
+        </a>
+        {%empty%}
+        <div class="team">No matchs yet available</div>
+        {% endfor %}
+    </div>
+</center>
+{%endblock%}

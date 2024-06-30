@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% load static %} {% block home %}
+<title>Sports | Add new Team</title>
+<center>
+    <p>Add new team</p>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input-field">
+            <select name="sport" id="sport">
+                {% for i in sports %}
+                <option value="{{i.id}}">{{i.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-field">
+            <input type="text" name="name" id="name">
+            <label for="name">Name</label>
+        </div>
+        <div class="input-field">
+            <input type="submit" value="submit">
+        </div>
+    </form>
+</center>
+{%endblock%}

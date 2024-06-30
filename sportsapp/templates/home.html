@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% load static %} {% block home %}
+<title>Sports | Home</title>
+<div>
+    <div class="hero">
+        <h1>Welcome to Cricket Club</h1>
+    </div>
+    <div class="home">
+        <div class="teams">
+            <h2>Teams</h2>
+            {% for i in team %}
+            <a href="{% url 'team' i.id %}"><div class="team">{{i.name}}</div></a>
+            {% empty %}
+            <div class="team">No teams available</div>
+            {% endfor %}
+            <br>
+            <a href="{% url 'players' %}"><div class="team">All Players</div></a>
+        </div>
+        <img src="../static/images/cricket-logo.jpg" alt="">
+    </div>  
+</div>
+{%endblock%}

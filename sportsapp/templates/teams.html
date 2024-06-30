@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% load static %} {% block home %}
+<title>Sports | All Teams</title>
+<div>
+    <div class="teams">
+        <h2>Teams</h2>
+        {% for i in team %}
+        <a href="{% url 'team' i.id %}"><div class="team">{{i.name}}</div></a>
+        {% empty %}
+        <div class="team">No teams available</div>
+        {% endfor %}
+    </div>
+</div>
+{%endblock%}

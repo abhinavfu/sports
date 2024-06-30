@@ -1,0 +1,100 @@
+{% extends 'base.html' %} {% load static %} {% block home %}
+<title>Sports | Team Scores</title>
+<div>
+    <center>
+    <h2>{{score.match.name}}</h2>
+    <h3>{{score.match.team.name}}</h3><br>
+    <div>
+        <table>
+            <tr>
+                <th>Innings</th>
+                <td>{% if score.inning == "1" %}1st{%else%}2nd{%endif%}</td>
+            </tr>
+            <tr>
+                <th>Innings status</th>
+                <td>{{score.status}}</td>
+            </tr>
+            {% if score.win_loss != '' %}
+            <tr>
+                <th>Win/Loss</th>
+                <td><span class="{{score.win_loss}}">{{score.win_loss}}</span></td>
+            </tr>
+            {%endif%}
+            <tr>
+                <th>Total Overs</th>
+                <td>{{overs}}</td>
+            </tr>
+            <tr>
+                <th>Total Score</th>
+                <td>{{score.total_score}}/{{wicket}}</td>
+            </tr>
+            <tr>
+                <th>Total Balls</th>
+                <td>{{total_balls}}</td>
+            </tr>
+            <tr>
+                <th>Current Over</th>
+                <td>{{current_over}}</td>
+            </tr>
+            <tr>
+                <th>Extra runs</th>
+                <td>{{extra_runs}}</td>
+            </tr>
+        </table>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="match-container">
+        {% if score.status == "not started" or score.status == "playing" %}
+        <h3>Add score</h3>
+        <div class="d-flex-c">
+            <div>
+                <div class="score">Runs : 
+                    <a href="{% url 'scoreAdd' score.id 0 %}"><span class="btn-score">0</span></a>
+                    <a href="{% url 'scoreAdd' score.id 1 %}"><span class="btn-score">1</span></a>
+                    <a href="{% url 'scoreAdd' score.id 2 %}"><span class="btn-score">2</span></a>
+                    <a href="{% url 'scoreAdd' score.id 3 %}"><span class="btn-score">3</span></a>    
+                    <a href="{% url 'scoreAdd' score.id 4 %}"><span class="btn-score">4</span></a>
+                    <a href="{% url 'scoreAdd' score.id 6 %}"><span class="btn-score">6</span></a>
+                </div>
+                <div class="score">Extra : 
+                    <a href="{% url 'scoreAdd' score.id 'noball' %}"><span class="btn-score">No Ball</span></a>
+                    <a href="{% url 'scoreAdd' score.id 'wide' %}"><span class="btn-score">Wide</span></a>
+                </div>
+                <div class="score">Wicket : 
+                    <a href="{% url 'scoreAdd' score.id 'wicket' %}"><span class="btn-score">Wicket</span></a>
+                </div>
+            </div>
+        </div>
+        {% elif score.status == "ends" %}
+        <h3>Innings ends</h3>
+        {%endif%}
+    </div>
+    {%else%}
+    <div class="match-container">
+        <h3>Innings {{score.status}}</h3>
+    </div>
+    {%endif%}
+    
+    <div>
+        <br>
+        <div>
+            Per ball details
+        </div>
+        <table>
+            <tr>
+                <th>Ball</th>
+                <th>Run</th>
+                <th>Comment</th>
+            </tr>
+            {% for i in scoreadd %}
+            <tr>
+                <td>{{i.ball}}</td>
+                <td>{{i.run}}</td>
+                <td>{{i.comment}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    </center>
+</div>
+{%endblock%}

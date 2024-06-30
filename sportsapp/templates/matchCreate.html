@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% load static %} {% block home %}
+<title>Sports | New Match</title>
+<div>
+    <center>
+        <p>Create a new Match</p>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="input-field">
+                <select name="teamA" id="teamA">
+                    {% for i in teams %}
+                    <option value="{{i.id}}">{{i.name}}</option>
+                    {% endfor %}
+                </select>
+                <label for="teamA">Team A</label>
+            </div>
+            <div class="input-field">
+                <select name="teamB" id="teamB">
+                    {% for i in teams %}
+                    <option value="{{i.id}}">{{i.name}}</option>
+                    {% endfor %}
+                </select>
+                <label for="teamB">Team B</label>
+            </div>
+            <div class="input-field">
+                <input type="submit" value="submit">
+            </div>
+        </form>
+    </center>
+</div>
+{%endblock%}

@@ -1,0 +1,21 @@
+{% load static %}
+<nav>
+    <ul>
+        <li><div class="logo"><img src="../static/images/cricket-logo.jpg" alt=""></div></li>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'teams' %}">Teams</a></li>
+        <li><a href="{% url 'match' %}">Matches</a></li>
+        {% if request.user.is_authenticated %}
+        <li>
+              <a class="btn btn-blue" href="{% url 'profile' %}">Profile</a>
+        </li>
+        <li>
+            <a class="btn btn-red" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {%else%}
+        <li>
+            <a class="btn btn-green" href="{% url 'signin' %}">SignIn</a>
+        </li>
+        {%endif%}
+    </ul>
+</nav>

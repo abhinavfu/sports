@@ -1,0 +1,274 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    scroll-behavior: smooth;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+:root {
+    --gray-3: rgba(128, 128, 128, 0.3);
+}
+body{
+  padding-bottom: 50px;
+}
+img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+svg{
+  fill: gray;
+  margin-left: 15px;
+}
+h2{
+  padding: 20px;
+}
+h2~p{
+  background-color: rgba(0, 128, 0, 0.1);
+  color: rgb(0, 128, 0);
+  padding: 10px;
+}
+.d-flex-c{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.d-flex-se{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+table {
+  width: 370px;
+}
+table :is(th,td) {
+  padding: 10px 15px;
+  text-align: left;
+  background-color: rgba(128, 128, 128, 0.1);
+}
+/* -------------- Navbar -------------------- */
+
+ul{
+    list-style: none;
+}
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ul li {
+    padding: 5px;
+    margin: 5px;
+}
+.logo{
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+/* -------------- form -------------------- */
+form {
+    max-width: 500px;
+    padding: 10px 20px;
+}
+input,select {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px;
+  }
+  
+  .input-field {
+    position: relative;
+    margin: 15px 0px;
+  }
+  .input-field input{
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--gray-3);
+    border-radius: 5px;
+  }
+  label {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    color: gray;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+  .input-field input:focus ~ label,
+  .input-field input:valid ~ label,
+  .input-field select:focus ~ label,
+  .input-field select:valid ~ label {
+    font-size: 13px;
+    transform: translateY(-25px);
+    background-color: white;
+    border-radius: 5px;
+    color: var(--blue);
+    padding: 0px 5px 2px 5px;
+  }
+  .btn-sm {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+/* -------------- Home -------------------- */
+.hero {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #f6f6f6;
+    color: rgba(246, 246, 246, 0.8);
+    font-size: 50px;
+    text-align: center;
+    padding: 0 10%;
+    background-image: url("../images/Cricket_Ground.jpg");
+    height: 500px;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; 
+}
+.home {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.home img {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  margin: 10px;
+}
+.teams {
+    padding: 50px;
+    width: 550px;
+}
+.teams .team {
+    border: 1px solid var(--gray-3);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    max-width: 450px;
+    min-width: 200px;
+}
+.teams .team:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+}
+
+/* -------------- win loss tie -------------------- */
+.win{
+  background-color: rgba(0, 128, 0, 0.1);
+  color: green;
+}
+.loss{
+  background-color: rgba(255, 0, 0, 0.1);
+  color: red;
+}
+.tie {
+  background-color: rgba(0, 145, 255, 0.1);
+  color: rgb(0, 145, 255);
+}
+.status {
+  background-color: rgba(128, 128, 128, 0.1);
+  color: gray;
+}
+:is(.win, .loss, .tie, .status){
+  padding: 3px 10px;
+  margin: 2px;
+  border-radius: 5px;
+}
+/* -------------- match Team -------------------- */
+.match-container {
+  border: 1px solid rgba(111, 200, 255, 0.3);
+  border-radius: 10px;
+  background-color: rgba(111, 200, 255, 0.07);
+  margin: 20px 0px;
+  padding: 20px;
+}
+.team-players{
+    max-width: 500px;
+    border-radius: 10px;
+}
+.team-players .player-card{
+    max-width: 370px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 1px solid var(--gray-3);
+}
+.team-players .player-card > div{
+  display: flex;
+  align-items: center;
+}
+.team-players li {
+  min-width: 270px;
+}
+.team-players li .player-card:hover{
+    background-color: rgba(128, 128, 128, 0.1);
+}
+.team-players .img-container{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+}
+/* -------------- Team -------------------- */
+#signin,
+  #signup,.sign-account {
+    width: 400px;
+    padding: 20px 40px 60px 40px;
+    display: block;
+  }
+  #signin div,
+  #signup div {
+    margin: 15px 0px;
+  }
+  .hide-show {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+  }
+  .hide-show span {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  .hide-show input{
+    display: none;
+  }
+/* -------------- Team -------------------- */
+.score{
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;
+}
+.btn-score{
+  border: 1px solid var(--gray-3);
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin: 5px;
+}
+
+
+/* ================ Tablet and Mobiles ============== */
+@media screen and (max-width: 900px) {
+
+}
+@media screen and (max-width: 500px) {
+    .hero {
+        height: 250px;
+        font-size: 20px;
+    }
+}
